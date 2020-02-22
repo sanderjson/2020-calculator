@@ -11,24 +11,15 @@
   // for fun
   let screenIsFlipped = false;
 
+  // enable vibration support
+  // navigator.vibrate =
+  //   navigator.vibrate ||
+  //   navigator.webkitVibrate ||
+  //   navigator.mozVibrate ||
+  //   navigator.msVibrate;
+
   const feedbackVibrate = () => {
-    console.log("vibrate");
-    window.navigator.vibrate(0) && window.navigator.vibrate(100);
-  };
-
-  const interactWithFlip = () => {
-    screenIsFlipped = !screenIsFlipped;
-  };
-
-  const interactWithClear = () => {
-    firstNum = "";
-    secondNum = "";
-    isOperatorActive = false;
-    countCalculation = 0;
-
-    currentOperator = null;
-    ans = null;
-    displayNum = 0;
+    window.navigator.vibrate(300);
   };
 
   const utilitySetError = () => {
@@ -71,6 +62,22 @@
   const utilityDisplaySecondNum = val => {
     secondNum = secondNum + val;
     displayNum = secondNum;
+  };
+
+  const interactWithFlip = () => {
+    feedbackVibrate();
+    screenIsFlipped = !screenIsFlipped;
+  };
+
+  const interactWithClear = () => {
+    feedbackVibrate();
+    firstNum = "";
+    secondNum = "";
+    isOperatorActive = false;
+    countCalculation = 0;
+    currentOperator = null;
+    ans = null;
+    displayNum = 0;
   };
 
   const interactWithNumber = val => {

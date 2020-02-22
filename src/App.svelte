@@ -11,7 +11,7 @@
 <style>
   :global(.fullscreen-controls svg) {
     width: 32px;
-    fill: red;
+    fill: blue;
   }
 </style>
 
