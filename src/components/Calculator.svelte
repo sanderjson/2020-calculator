@@ -11,6 +11,11 @@
   // for fun
   let screenIsFlipped = false;
 
+  const feedbackVibrate = () => {
+    console.log("vibrate");
+    window.navigator.vibrate(0) && window.navigator.vibrate(100);
+  };
+
   const interactWithFlip = () => {
     screenIsFlipped = !screenIsFlipped;
   };
@@ -69,14 +74,14 @@
   };
 
   const interactWithNumber = val => {
-    window.navigator.vibrate(100);
+    feedbackVibrate();
     !currentOperator
       ? utilityDisplayFirstNum(val)
       : utilityDisplaySecondNum(val);
   };
 
   const interactWithOperator = op => {
-    window.navigator.vibrate(100);
+    feedbackVibrate();
     if (op === "=") {
       if (firstNum !== "" && secondNum === "") {
         ans = firstNum;
