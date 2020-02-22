@@ -69,12 +69,14 @@
   };
 
   const interactWithNumber = val => {
+    window.navigator.vibrate(100);
     !currentOperator
       ? utilityDisplayFirstNum(val)
       : utilityDisplaySecondNum(val);
   };
 
   const interactWithOperator = op => {
+    window.navigator.vibrate(100);
     if (op === "=") {
       if (firstNum !== "" && secondNum === "") {
         ans = firstNum;
