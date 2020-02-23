@@ -12,23 +12,43 @@
   let screenIsFlipped = false;
 
   // enable vibration support
-  // navigator.vibrate =
-  //   navigator.vibrate ||
-  //   navigator.webkitVibrate ||
-  //   navigator.mozVibrate ||
-  //   navigator.msVibrate;
+  navigator.vibrate =
+    navigator.vibrate ||
+    navigator.webkitVibrate ||
+    navigator.mozVibrate ||
+    navigator.msVibrate;
 
   const feedbackVibrate = () => {
-    window.navigator.vibrate(300);
+    navigator.vibrate(50);
   };
 
   const utilitySetError = () => {
     displayNum = "error";
   };
 
+  const utilityOperatorObj = {
+    "+": function(a, b) {
+      return a + b;
+    },
+    "-": function(a, b) {
+      return a - b;
+    },
+    "*": function(a, b) {
+      return a * b;
+    },
+    "/": function(a, b) {
+      return a / b;
+    },
+    "%": function(a, b) {
+      return a % b;
+    }
+  };
+
   const utilityCalculateAns = () => {
     try {
-      ans = eval(firstNum + currentOperator + secondNum);
+      firstNum = Number(firstNum);
+      secondNum = Number(secondNum);
+      ans = utilityOperatorObj[currentOperator](firstNum, secondNum);
     } catch (err) {
       ans = "error";
       // console.log(err);
@@ -37,9 +57,10 @@
   const utilityGetResult = () => {
     if (firstNum) {
       utilityCalculateAns();
-      firstNum = ans;
+      firstNum = String(ans);
       countCalculation = countCalculation + 1;
       secondNum = "";
+      ans > 1000000 ? (ans = ans.toExponential(2)) : (ans = ans);
       displayNum = ans;
       // console.log("utilityGetResult", ans);
     } else {
