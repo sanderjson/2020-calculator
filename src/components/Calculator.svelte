@@ -60,7 +60,9 @@
       firstNum = String(ans);
       countCalculation = countCalculation + 1;
       secondNum = "";
-      ans > 1000000 ? (ans = ans.toExponential(2)) : (ans = ans);
+      Math.abs(ans > 1000000) || Math.abs(ans < 0.00001)
+        ? (ans = ans.toExponential(2))
+        : (ans = ans);
       displayNum = ans;
       // console.log("utilityGetResult", ans);
     } else {

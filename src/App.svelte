@@ -10,8 +10,8 @@
 
 <style>
   :global(.fullscreen-controls svg) {
-    width: 32px;
-    fill: blue;
+    width: 24px;
+    fill: #a0aec0;
   }
 </style>
 
@@ -21,8 +21,9 @@
   <main class="m-0">
     <section
       class="bg relative flex flex-col justify-center items-center bg-red-100
-      w-screen h-screen">
-      <div class="fullscreen-controls absolute mx-auto top-0 mt-8">
+      w-screen h-screen mb-4">
+      <Calculator />
+      <div class="fullscreen-controls absolute mx-auto bottom-0 mb-12">
         {#if !isFullscreen}
           <button
             on:click={() => {
@@ -41,7 +42,6 @@
           </button>
         {/if}
       </div>
-      <Calculator />
     </section>
 
     <footer class="bg-black text-white text-2xl pt-6 pb-2">
