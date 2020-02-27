@@ -9,6 +9,10 @@
 </script>
 
 <style>
+  main {
+    height: 100vh;
+    max-height: 100vh;
+  }
   :global(.fullscreen-controls svg) {
     width: 24px;
     fill: #a0aec0;
@@ -18,12 +22,12 @@
 <Tailwindcss />
 
 <SvelteFullscreen let:onRequest let:onExit>
-  <main class="m-0">
-    <section
+  <main class="p-4 sm:p-0 xs:m-0">
+    <!-- <section
       class="bg relative flex flex-col justify-center items-center bg-red-100
-      w-screen h-screen mb-4">
-      <Calculator />
-      <div class="fullscreen-controls absolute mx-auto bottom-0 mb-12">
+      w-screen h-screen mb-4 p-8 sm:p-0"> -->
+    <Calculator />
+    <!-- <div class="fullscreen-controls absolute mx-auto bottom-0 mb-12">
         {#if !isFullscreen}
           <button
             on:click={() => {
@@ -41,15 +45,15 @@
             <SvgCompress />
           </button>
         {/if}
-      </div>
-    </section>
-
-    <footer class="bg-black text-white text-2xl pt-6 pb-2">
-      <div class="container mx-auto flex justify-between mx-4">
-        <span>Calculator</span>
-        <div>@sanderjson</div>
-      </div>
-    </footer>
+      </div> -->
+    <!-- </section> -->
 
   </main>
+
+  <!-- <footer class="bg-black text-white text-2xl pt-6 pb-2">
+    <div class="container mx-auto flex justify-between mx-4">
+      <span>Calculator</span>
+      <div>@sanderjson</div>
+    </div>
+  </footer> -->
 </SvelteFullscreen>

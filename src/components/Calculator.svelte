@@ -76,15 +76,22 @@
     // console.log("setOperator", currentOperator);
   };
 
+  const utilityDisplayNum = num => {
+    num = Number(num);
+    Math.abs(num > 1000000) || Math.abs(num < 0.00001)
+      ? (num = num.toExponential(2))
+      : (num = num);
+    return num;
+  };
+
   const utilityDisplayFirstNum = val => {
-    countCalculation > 0 ? (firstNum = "") : "";
     firstNum = firstNum + val;
-    displayNum = firstNum;
+    displayNum = utilityDisplayNum(firstNum);
   };
 
   const utilityDisplaySecondNum = val => {
     secondNum = secondNum + val;
-    displayNum = secondNum;
+    displayNum = utilityDisplayNum(secondNum);
   };
 
   const interactWithFlip = () => {
@@ -145,11 +152,29 @@
 
 <style>
   .device {
-    min-width: 320px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .device-internal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
   }
   .screen {
+    flex-grow: 1;
     font-family: "Orbitron", "Nova Mono", monospace;
     min-height: 74px;
+  }
+
+  .pad {
+    flex-grow: 50;
+    width: 100%;
+    background: yellow;
+    /* height: calc(100% - 74px); */
+    display: flex;
+    flex-direction: column;
   }
 
   .screen.flip {
@@ -157,13 +182,16 @@
   }
 
   .buttons-top {
+    flex-grow: 1;
     display: flex;
-    margin: 1em 0;
   }
+
   .buttons-main {
+    flex-grow: 5;
     display: grid;
     place-items: center;
-    row-gap: 1em;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
       "clear mem percent divide"
       "num7 num8 num9 multiply"
@@ -173,18 +201,7 @@
   }
 
   .button {
-    box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.382);
-    transition: all 0.3s ease;
-    @apply cursor-pointer uppercase font-semibold text-white bg-blue-600 rounded flex justify-center items-center;
-  }
-
-  .button:hover {
-    box-shadow: 1px 4px 5px 2px rgba(0, 0, 0, 0.191);
-    @apply bg-blue-500;
-  }
-  .button:active {
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
-    @apply bg-blue-600;
+    @apply cursor-pointer uppercase font-semibold text-white border border-white bg-blue-600 flex justify-center items-center;
   }
 
   .button.clear {
@@ -197,12 +214,11 @@
     @apply bg-red-600;
   }
 
-  .button-sm {
-    @apply text-base w-8 h-8;
-  }
+  .button-sm,
   .button-lg {
-    @apply text-lg w-12 h-12;
+    @apply text-2xl w-full h-full;
   }
+
   .clear {
     grid-area: clear;
   }
@@ -261,7 +277,42 @@
     grid-area: num9;
   }
 
-  @media (min-width: 640px) {
+  @media only screen and (min-wdith: 480px) {
+    .device {
+      min-width: 320px;
+      width: initial;
+      height: initial;
+    }
+    .buttons-top {
+      margin: 1em 0;
+    }
+
+    .buttons-main {
+      row-gap: 1em;
+    }
+
+    .button {
+      box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.382);
+      transition: all 0.3s ease;
+      @apply rounded;
+    }
+
+    .button:hover {
+      box-shadow: 1px 4px 5px 2px rgba(0, 0, 0, 0.191);
+    }
+    .button:active {
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    .button-sm {
+      @apply text-base w-8 h-8;
+    }
+    .button-lg {
+      @apply text-lg w-12 h-12;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
     .button-sm {
       @apply text-xl w-12 h-12;
     }
@@ -272,17 +323,19 @@
 </style>
 
 <div
-  class="device flex flex-col bg-gray-500 shadow-xl sm:shadow-2xl container
-  mx-auto rounded max-w-xs sm:max-w-sm pt-4 pb-2 sm:pt-8 sm:pb-4">
-  <div class="mx-4">
+  class="device bg-gray-500 shadow-xl sm:shadow-2xl container mx-auto xs:rounded
+  sm:max-w-sm xs:pt-4 xs:pb-2 sm:pt-8 sm:pb-4">
+  <div class="device-internal mx-0 xs:mx-4">
+    <!-- SCREEN -->
     <div
       class="{screenIsFlipped === true ? 'flip' : ''} screen text-4xl
-      bg-teal-200 mx-8 my-4 border-b-2 border-t-2 border-l-8 border-r-8
-      border-teal-800 rounded tracking-tight">
+      bg-teal-200 sm:mx-8 xs:my-4 border-b-2 border-t-2 border-l-8 border-r-8
+      border-teal-800 xs:rounded tracking-tight flex items-center justify-end">
       <div id="ans" class="text-right p-2">{displayNum}</div>
     </div>
-
-    <div class="pad mx-6 sm:mx-8 my-4">
+    <!-- BUTTONS -->
+    <div class="pad xs:mx-6 sm:mx-8 sm:my-4">
+      <!-- TOP ROW -->
       <div class="buttons-top flex justify-evenly">
         <button
           on:click={e => interactWithTopButtons(e.target.value)}
@@ -310,6 +363,7 @@
           ±
         </button>
       </div>
+      <!-- MAIN SECTION -->
       <div class="buttons-main">
         <button
           on:click={interactWithClear}
