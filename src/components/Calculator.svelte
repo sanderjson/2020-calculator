@@ -153,7 +153,7 @@
 <style>
   .device {
     width: 100%;
-    height: 100%;
+    height: 100vh;
   }
 
   .device-internal {
@@ -163,16 +163,14 @@
     height: 100%;
   }
   .screen {
-    flex-grow: 1;
+    height: 10%;
     font-family: "Orbitron", "Nova Mono", monospace;
     min-height: 74px;
   }
 
   .pad {
-    flex-grow: 50;
+    flex-grow: 1;
     width: 100%;
-    background: yellow;
-    /* height: calc(100% - 74px); */
     display: flex;
     flex-direction: column;
   }
@@ -182,12 +180,12 @@
   }
 
   .buttons-top {
-    flex-grow: 1;
+    height: 10%;
     display: flex;
   }
 
   .buttons-main {
-    flex-grow: 5;
+    flex-grow: 1;
     display: grid;
     place-items: center;
     grid-template-rows: repeat(5, 1fr);
@@ -277,64 +275,27 @@
     grid-area: num9;
   }
 
-  @media only screen and (min-wdith: 480px) {
+  @media only screen and (min-width: 480px) {
     .device {
-      min-width: 320px;
-      width: initial;
-      height: initial;
-    }
-    .buttons-top {
-      margin: 1em 0;
-    }
-
-    .buttons-main {
-      row-gap: 1em;
-    }
-
-    .button {
-      box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.382);
-      transition: all 0.3s ease;
-      @apply rounded;
-    }
-
-    .button:hover {
-      box-shadow: 1px 4px 5px 2px rgba(0, 0, 0, 0.191);
-    }
-    .button:active {
-      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
-    }
-
-    .button-sm {
-      @apply text-base w-8 h-8;
-    }
-    .button-lg {
-      @apply text-lg w-12 h-12;
-    }
-  }
-
-  @media only screen and (min-width: 640px) {
-    .button-sm {
-      @apply text-xl w-12 h-12;
-    }
-    .button-lg {
-      @apply text-2xl w-16 h-16;
+      height: 540px;
+      width: 400px;
     }
   }
 </style>
 
 <div
-  class="device bg-gray-500 shadow-xl sm:shadow-2xl container mx-auto xs:rounded
-  sm:max-w-sm xs:pt-4 xs:pb-2 sm:pt-8 sm:pb-4">
-  <div class="device-internal mx-0 xs:mx-4">
+  class="device sm:rounded-xs bg-gray-500 border-2 border-gray-600 shadow-xl sm:shadow-2xl mx-auto xs:rounded
+  xs:pt-4 xs:pb-2 xs:px-1 sm:pt-8 sm:pb-4">
+  <div class="device-internal">
     <!-- SCREEN -->
     <div
       class="{screenIsFlipped === true ? 'flip' : ''} screen text-4xl
-      bg-teal-200 sm:mx-8 xs:my-4 border-b-2 border-t-2 border-l-8 border-r-8
+      bg-teal-200 xs:my-4 border-b-2 border-t-2 border-l-8 border-r-8
       border-teal-800 xs:rounded tracking-tight flex items-center justify-end">
       <div id="ans" class="text-right p-2">{displayNum}</div>
     </div>
     <!-- BUTTONS -->
-    <div class="pad xs:mx-6 sm:mx-8 sm:my-4">
+    <div class="pad">
       <!-- TOP ROW -->
       <div class="buttons-top flex justify-evenly">
         <button
