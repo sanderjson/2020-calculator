@@ -138,7 +138,7 @@
   };
 
   const interactWithTopButtons = val => {
-    alert("CANT TOUCH THIS");
+    alert("🎵🎵 Can't touch this 🎵🎵");
   };
 
   // $: console.log("firstNum", firstNum);
