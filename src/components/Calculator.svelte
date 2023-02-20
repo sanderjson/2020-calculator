@@ -20,7 +20,7 @@
   //   navigator.msVibrate;
 
   const feedbackVibrate = () => {
-    navigator.vibrate(50);
+    // navigator.vibrate(50);
   };
 
   const utilitySetError = () => {
