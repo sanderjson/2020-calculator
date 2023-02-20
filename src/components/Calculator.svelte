@@ -12,11 +12,12 @@
   let screenIsFlipped = false;
 
   // enable vibration support
-  navigator.vibrate =
-    navigator.vibrate ||
-    navigator.webkitVibrate ||
-    navigator.mozVibrate ||
-    navigator.msVibrate;
+  // disable due to iOS
+  // navigator.vibrate =
+  //   navigator.vibrate ||
+  //   navigator.webkitVibrate ||
+  //   navigator.mozVibrate ||
+  //   navigator.msVibrate;
 
   const feedbackVibrate = () => {
     navigator.vibrate(50);
