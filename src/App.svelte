@@ -1,12 +1,13 @@
 <script>
-  import SvelteFullscreen from "svelte-fullscreen";
-  import Tailwindcss from "./Tailwindcss.svelte";
-  import Calculator from "./components/Calculator.svelte";
-  import SvgExpand from "./components/SvgExpand.svelte";
-  import SvgCompress from "./components/SvgCompress.svelte";
-
-  let isFullscreen;
+  // import SvelteFullscreen from "svelte-fullscreen";
+  import Calculator from "./lib/Calculator.svelte";
+  import Calculator2 from "./lib/Calculator_2.svelte";
 </script>
+
+<div class="bg bg-blue-100">
+  <!-- <Calculator /> -->
+  <Calculator2 />
+</div>
 
 <style>
   .bg {
@@ -15,11 +16,3 @@
     align-items: center;
   }
 </style>
-
-<Tailwindcss />
-
-<SvelteFullscreen let:onRequest let:onExit>
-  <div class="bg bg-blue-100">
-    <Calculator />
-  </div>
-</SvelteFullscreen>

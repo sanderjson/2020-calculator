@@ -1,4 +1,6 @@
-module.exports = {
+const config = {
+  content: ["./src/**/*.{html,js,svelte,ts}"],
+
   theme: {
     screens: {
       'xs': '480px',
@@ -6,11 +8,16 @@ module.exports = {
       'md': '768px',
       'lg': '1024px',
       'xl': '1280px',
-    }
+    },
+    extend: {},
   },
   variants: {
     backgroundColor: ["responsive", "hover", "focus"]
   },
-  plugins: []
+
+  plugins: [],
 };
+
+module.exports = config;
+
 
