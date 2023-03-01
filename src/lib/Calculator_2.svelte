@@ -1,25 +1,9 @@
 <script>
-  //   // calculator basics
-  //   let firstNum = "";
-  //   let secondNum = "";
-  //   let isOperatorActive = false;
-  //   let currentOperator = null;
-  //   let countCalculation = 0;
-  //   let displayNum = 0;
-  //   let ans = null;
-  //   let is_negative = false;
-
-  // for fun
-  //   let screenIsFlipped = false;
-
-  //   const interactWithTopButtons = (val) => {
-  //     alert("🎵🎵 Can't touch this 🎵🎵");
-  //   };
-
-  let current_input = "";
-  let current_expression = "";
   let display = "";
   let is_screen_flipped = false;
+
+  let current_expression = "";
+  let last_result = "";
 
   function u_update_display(value) {
     display = value;
@@ -35,42 +19,46 @@
 
   function handle_input(target) {
     let input = target.dataset.value;
-    // Check if the input is a valid number or operator
+    // Check if the input is a valid number, operator, or decimal point
     if (
       /^\d$/.test(input) ||
       ["+", "-", "*", "/"].includes(input) ||
       input === "."
     ) {
-      // If the input is a decimal point, make sure it's not already in the current input
-      if (input === "." && current_input.includes(".")) {
-        return;
-      }
-
-      // If the input is a valid input and the current input doesn't exceed 12 characters, append it to the current input
-      if (current_input.length < 12) {
+      // If it's a valid input, append it to the current expression
+      if (current_expression.length < 12) {
         current_expression += input;
-        // Update the display with the current input
+        // Update the display with the current expression
         u_update_display(current_expression);
       }
     } else if (input === "C") {
-      // If the input is 'C', clear the current input and update the display
+      // If the input is 'C', clear the current expression and update the display
       current_expression = "";
       u_update_display(current_expression);
     } else if (input === "=") {
-      // If the input is '=', evaluate the current input and update the display
+      // If the input is '=', evaluate the current expression and update the display
       let result = eval(current_expression);
       // Check if the result is a large or small number
       if (
         Math.abs(result) >= 1e8 ||
         (Math.abs(result) > 0 && Math.abs(result) < 1e-4)
       ) {
-        result = result.toExponential(3);
+        // Split the result into its base and exponent
+        const [base, exponent] = result.toExponential(3).split("e");
+        // Limit the number of characters to 12 for the base
+        const limitedBase = base.slice(0, 12);
+        // Join the base and exponent back together
+        result = `${limitedBase}e${exponent}`;
+      } else {
+        // Limit the number of characters to 12
+        result = result.toString().slice(0, 12);
       }
-      // Limit the number of characters to 12
-      result = result.toString().slice(0, 8);
       u_update_display(result);
-      // Clear the current input to start a new calculation
+      // Save the result as the start of a new expression
       current_expression = result.toString();
+    } else {
+      // If the input is an operator, append it to the current expression
+      current_expression += input;
     }
   }
 </script>
